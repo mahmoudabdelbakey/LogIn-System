@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,111 +14,12 @@ namespace Log_in__System
 
         static void Border()
         {
-            Console.WriteLine("--------------------------");
-            Console.WriteLine("|\tLogIn System.  \t |");
-            Console.WriteLine("--------------------------");
+            Console.WriteLine("*--------------------------*");
+            Console.WriteLine("  ------------------------");
+            Console.WriteLine("  |\tLogIn System.  \t |");
+            Console.WriteLine("  ------------------------");
+            Console.WriteLine("*--------------------------*");
 
-            
-
-        }
-        static string[] Birthday()
-        {
-            while (true)
-            {
-                string[] birthday = Console.ReadLine().Split('/');//Birthday in DD/MM/YYYY
-                try
-                {
-                    int day = int.Parse(birthday[0]);
-                    int month = int.Parse(birthday[1]);
-                    int year = int.Parse(birthday[2]);
-                    return birthday;
-
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    Console.WriteLine("Your birthday in form (DD/MM/YYYY). ");
-                    Console.WriteLine();
-                    continue;
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("The numbers should be intger.");
-                    Console.WriteLine();
-                    continue;
-                }
-
-            }
-        }
-        static string DisplayName()//solve problem in username  
-        {
-            string username;
-            while (true)
-            {
-
-                username = Console.ReadLine();
-
-                if (string.IsNullOrWhiteSpace(username))
-                {
-                    Console.WriteLine();
-                    Console.Write("Invalid input,Please try again :-  ");
-                    continue;
-                }
-                try
-                {
-                    int number = int.Parse(username);
-                    Console.WriteLine();
-                    Console.Write("Enter name ,Not number :- ");
-                }
-                catch (FormatException)
-                {
-                    return username;
-                }
-            }
-        }
-
-        static string AnthorInfo()//solve problem in username  
-        {
-            string anthorInfo;
-            while (true)
-            {
-
-                anthorInfo = Console.ReadLine();
-
-                if (string.IsNullOrWhiteSpace(anthorInfo))
-                {
-                    Console.WriteLine();
-                    Console.Write("Invalid input,Please try again ( YES or NO ) :-  ");
-                    continue;
-                }
-                try
-                {
-                    int number = int.Parse(anthorInfo);
-                    Console.WriteLine();
-                    Console.Write("Invalid input please enter ( YES or NO ):- ");
-                }
-                catch (FormatException)
-                {
-                    return anthorInfo;
-                }
-            }
-        }
-        static string Try()//solve problem in password  
-        {
-            string password;
-            while (true)
-            {
-                Console.Write("Enter your password :- ");
-                password = Console.ReadLine();
-                Console.WriteLine();
-                if (string.IsNullOrWhiteSpace(password))
-                {
-                    Console.WriteLine("Invalid input, please try again. ");
-                    Console.WriteLine();
-                    continue;
-                }
-                break;
-            }
-            return password;
         }
         static void DisplayMenu()
         {
@@ -161,9 +62,17 @@ namespace Log_in__System
 
             return num;
         }
+        
+        
+       
+        
 
         static void LogIn(int i)
         {
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("|\t  LogIn.  \t |");
+            Console.WriteLine("--------------------------");
+
 
 
             string[] birthday = new string[3];
@@ -178,7 +87,6 @@ namespace Log_in__System
 
             while (logInFlag)
             {
-
 
                 Console.WriteLine();
                 Console.Write("Enter username :- ");
@@ -205,7 +113,7 @@ namespace Log_in__System
                     continue;
                 }
                 Console.WriteLine();
-                password = Try();
+                password = TryPassword();
 
                 while (logInFlag)
                 {
@@ -314,14 +222,23 @@ namespace Log_in__System
                 }
 
                 Console.WriteLine("----------------------------------------------------------");
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("Enter any key to continue...");
+                Console.ReadKey();
+                Console.WriteLine();
                 Console.Clear();
                 break;
             }
         }
         static void EditProfile()//edit username and password in your account
         {
-
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("|\tEdit Profile.  \t |");
+            Console.WriteLine("--------------------------");
             string username;
+            string username1;
+
             string password;
             Console.WriteLine();
             Console.WriteLine();
@@ -356,7 +273,7 @@ namespace Log_in__System
             }
 
             Console.WriteLine();
-            password = Try();
+            password = TryPassword();
             bool editPasswordFlag = true;
             while (editPasswordFlag)
             {
@@ -372,7 +289,7 @@ namespace Log_in__System
                 if (editPasswordFlag == true)
                 {
                     Console.WriteLine("Sorry , password is wrong.");
-                    password = Try();
+                    password = TryPassword();
                     Console.WriteLine();
 
                 }
@@ -383,7 +300,7 @@ namespace Log_in__System
                 if (usernameOfAllUsers[j] == username && passwordOfAllUsers[j] == password)
                 {
                     Console.Write("Enter new username :- ");
-                    username = DisplayName();
+                    username1 = DisplayName();
                     try
                     {
                         for (int i = 0; i < usernameOfAllUsers.Length; i++)
@@ -391,9 +308,9 @@ namespace Log_in__System
                             if (usernameOfAllUsers != null)
                             {
 
-                                if (usernameOfAllUsers[i] == username)
+                                if (usernameOfAllUsers[i] == username1)
                                 {
-                                    throw new FormatException("No ,This same username :- ");
+                                    throw new FormatException("No ,This username is used:- ");
                                 }
                             }
 
@@ -403,16 +320,19 @@ namespace Log_in__System
                     {
                         Console.WriteLine();
                         Console.WriteLine(ex.Message);
-                        j--;
+                        j=0;
                         continue;
                     }
                     Console.WriteLine();
-                    password = Try();
-                    usernameOfAllUsers[j] = username;
+                    password = TryPassword();
+                    usernameOfAllUsers[j] = username1;
                     passwordOfAllUsers[j] = password;
                     Console.Clear();
+                    Console.WriteLine();
+                    Console.WriteLine();
                     Console.WriteLine("Task completed successfully");
-                    Console.WriteLine($"New username is {username}");
+                    Console.WriteLine();
+                    Console.WriteLine($"New username is {username1}");
                     Console.WriteLine();
                     Console.WriteLine();
 
@@ -420,11 +340,17 @@ namespace Log_in__System
 
             }
             Console.WriteLine("----------------------------------------------------------");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Enter any key to continue...");
+            Console.ReadKey();
+            Console.WriteLine();
         }
         static void DeleteAccount()//Delete your Account if you know old username and old password
         {
-
-            string username;
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("|\tDelete Account.\t  |");
+            Console.WriteLine("--------------------------"); string username;
             string password;
 
             Console.WriteLine();
@@ -459,8 +385,7 @@ namespace Log_in__System
 
             }
 
-            password = Try();
-            Console.Clear();
+            password = TryPassword();
             bool DeletePasswordFlag = true;
             while (DeletePasswordFlag)
             {
@@ -480,21 +405,33 @@ namespace Log_in__System
                 if (DeletePasswordFlag == true)
                 {
                     Console.WriteLine("Sorry ,Password is wrong.");
-                    password = Try();
+                    password = TryPassword();
                     Console.WriteLine();
                 }
 
                 usernameOfAllUsers = usernameOfAllUsers.Where(x => x != username).ToArray();
                 passwordOfAllUsers = passwordOfAllUsers.Where(x => x != password).ToArray();
+                Console.WriteLine();
                 Console.WriteLine($"Your account {username} are delete");
                 Console.WriteLine();
+                break;
 
             }
             Console.WriteLine("----------------------------------------------------------");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Enter any key to continue...");
+            Console.ReadKey();
+            Console.WriteLine();
         }
         static void DisplayAllUsernames()// show all Username 
         {
-
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("|    Display Accounts.\t |");
+            Console.WriteLine("--------------------------");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("Display all usernames:-");
             Console.WriteLine();
             Array.Sort(usernameOfAllUsers);
@@ -511,10 +448,17 @@ namespace Log_in__System
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("----------------------------------------------------------");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Enter any key to continue...");
+            Console.ReadKey();
+            Console.WriteLine();
+
         }
         static bool AreYouNeedDoAnythingAgain(bool importantFlag)
         {
             string anthorInfo;
+            Console.Clear();
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Are you need do anything again (YES or NO ):- ");
@@ -542,8 +486,109 @@ namespace Log_in__System
             }
             return importantFlag;
         }
+        static string DisplayName()//solve problem in username  
+        {
+            string username;
+            while (true)
+            {
+
+                username = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(username))
+                {
+                    Console.WriteLine();
+                    Console.Write("Invalid input,Please try again :-  ");
+                    continue;
+                }
+                try
+                {
+                    int number = int.Parse(username);
+                    Console.WriteLine();
+                    Console.Write("Enter name ,Not number :- ");
+                }
+                catch (FormatException)
+                {
+                    return username;
+                }
+            }
+        }
+        static string TryPassword()//solve problem in password  
+        {
+            string password;
+            while (true)
+            {
+                Console.Write("Enter your password :- ");
+                password = Console.ReadLine();
+                Console.WriteLine();
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    Console.WriteLine("Invalid input, please try again. ");
+                    Console.WriteLine();
+                    continue;
+                }
+                break;
+            }
+            return password;
+        }
+        static string[] Birthday()
+        {
+            while (true)
+            {
+                string[] birthday = Console.ReadLine().Split('/');//Birthday in DD/MM/YYYY
+                try
+                {
+                    int day = int.Parse(birthday[0]);
+                    int month = int.Parse(birthday[1]);
+                    int year = int.Parse(birthday[2]);
+                    return birthday;
+
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    Console.WriteLine("Your birthday in form (DD/MM/YYYY). ");
+                    Console.WriteLine();
+                    continue;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("The numbers should be intger.");
+                    Console.WriteLine();
+                    continue;
+                }
+
+            }
+        }
+
+
+        static string AnthorInfo()
+        {
+            string anthorInfo;
+            while (true)
+            {
+
+                anthorInfo = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(anthorInfo))
+                {
+                    Console.WriteLine();
+                    Console.Write("Invalid input,Please try again ( YES or NO ) :-  ");
+                    continue;
+                }
+                try
+                {
+                    int number = int.Parse(anthorInfo);
+                    Console.WriteLine();
+                    Console.Write("Invalid input please enter ( YES or NO ):- ");
+                }
+                catch (FormatException)
+                {
+                    return anthorInfo;
+                }
+            }
+        }
         static void Main(string[] args)
         {
+            
             bool importantFlag = true;
             int i = 0;
             //Border();
